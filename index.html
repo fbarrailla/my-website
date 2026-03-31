@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>François Barrailla — Web Developer</title>
+  <meta name="description" content="Web developer, AI enthusiast & world traveler. Building thoughtful digital experiences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           oklch(96.5% 0.010 82);
+      --fg:           oklch(18%  0.015 258);
+      --accent:       oklch(54%  0.130 46);
+      --accent-warm:  oklch(78%  0.110 62);
+      --accent-soft:  oklch(91%  0.045 75);
+      --muted:        oklch(52%  0.008 258);
+      --border:       oklch(88%  0.010 82);
+
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+    }
+
+    nav.scrolled {
+      background: oklch(96.5% 0.010 82 / 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 2.5rem 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.15s ease-out forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(4.5rem, 12.5vw, 11.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.025em;
+      margin-bottom: 3rem;
+    }
+
+    .hero-name .line-1 {
+      display: block;
+      opacity: 0;
+      transform: translateY(48px);
+      animation: fadeUp 0.9s 0.35s ease-out forwards;
+    }
+
+    .hero-name .line-2 {
+      display: block;
+      font-style: italic;
+      color: var(--accent);
+      padding-left: clamp(2rem, 7vw, 9rem);
+      opacity: 0;
+      transform: translateY(48px);
+      animation: fadeUp 0.9s 0.55s ease-out forwards;
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.85s ease-out forwards;
+    }
+
+    /* Identity rotator */
+    .hero-identity {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--muted);
+      height: 1.7em;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .identity-track {
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+    }
+
+    .identity-item {
+      height: 1.7em;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Scroll CTA */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-cta:hover { color: var(--accent); }
+
+    .hero-cta:hover .cta-arrow { transform: translateX(4px); }
+
+    .cta-arrow {
+      display: inline-block;
+      transition: transform 0.25s ease-out;
+    }
+
+    /* ── TICKER ──────────────────────────────────────── */
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+      background: var(--accent-soft);
+      user-select: none;
+    }
+
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 22s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding-right: 2.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .ticker-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent-warm);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────── */
+    .section-wrap {
+      padding: clamp(4.5rem, 10vw, 8rem) 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      max-width: 1080px;
+    }
+
+    .about-statement {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+    }
+
+    .about-statement em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .about-body p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--muted);
+      cursor: default;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── CRAFT ───────────────────────────────────────── */
+    .craft-section {
+      border-top: 1px solid var(--border);
+      padding-top: 0;
+    }
+
+    .craft-section .section-wrap {
+      padding-top: clamp(4.5rem, 10vw, 8rem);
+    }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+    }
+
+    .craft-item {
+      padding: 3rem 2rem 3rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+
+    .craft-item:last-child { border-right: none; }
+
+    .craft-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-soft), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .craft-item:hover { background: oklch(94% 0.020 80); }
+    .craft-item:hover::after { opacity: 1; }
+
+    .craft-num {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--border);
+      margin-bottom: 2rem;
+      transition: color 0.35s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .craft-item:hover .craft-num {
+      color: oklch(80% 0.08 75);
+    }
+
+    .craft-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .craft-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact-section {
+      background: var(--fg);
+      padding: clamp(5rem, 12vw, 10rem) 2.5rem;
+    }
+
+    .contact-inner { max-width: 860px; }
+
+    .contact-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: oklch(96.5% 0.010 82);
+      margin-bottom: 3rem;
+    }
+
+    .contact-headline em {
+      font-style: italic;
+      color: var(--accent-warm);
+    }
+
+    .contact-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: oklch(96.5% 0.010 82);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: oklch(60% 0.13 46);
+      transform: translateY(-2px);
+    }
+
+    .link-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: oklch(62% 0.008 258);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .link-secondary:hover { color: oklch(90% 0.010 82); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+
+      .hero { padding: 0 1.5rem 3.5rem; }
+
+      .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+
+      .section-wrap { padding: clamp(3rem, 8vw, 5rem) 1.5rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .craft-grid { grid-template-columns: 1fr; }
+
+      .craft-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.5rem 0;
+      }
+      .craft-item:last-child { border-bottom: none; }
+
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-name .line-1,
+      .hero-name .line-2,
+      .hero-eyebrow,
+      .hero-bottom { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo">FB</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#craft">Craft</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
+      <span class="hero-eyebrow">Open to new projects</span>
+      <h1 class="hero-name">
+        <span class="line-1">François</span>
+        <span class="line-2">Barrailla</span>
+      </h1>
+      <div class="hero-bottom">
+        <div class="hero-identity" aria-label="Web Developer · AI Enthusiast · World Traveler">
+          <div class="identity-track" id="identityTrack">
+            <div class="identity-item">Web Developer</div>
+            <div class="identity-item">AI Enthusiast</div>
+            <div class="identity-item">World Traveler</div>
+          </div>
+        </div>
+        <a href="#contact" class="hero-cta">
+          Say hello <span class="cta-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-wrap">
+      <p class="section-label">About</p>
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="about-statement">
+            Building the web,<br>
+            exploring <em>AI frontiers,</em><br>
+            and the world.
+          </p>
+        </div>
+        <div class="about-body reveal reveal-delay-1">
+          <p>
+            I'm François — a web developer with a genuine curiosity for what comes next.
+            I craft digital experiences that are fast, precise, and thoughtfully made,
+            while staying close to how AI is reshaping the craft.
+          </p>
+          <p>
+            When I'm not deep in code, I'm probably somewhere unexpected —
+            camera in hand, collecting perspectives that quietly make their way
+            back into how I build.
+          </p>
+          <div class="tags">
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">LLMs & AI Tools</span>
+            <span class="tag">Web Performance</span>
+            <span class="tag">Photography</span>
+            <span class="tag">Travel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRAFT -->
+    <div class="craft-section">
+      <div class="section-wrap">
+        <p class="section-label">What I do</p>
+      </div>
+      <div id="craft" class="craft-grid">
+        <div class="craft-item reveal">
+          <div class="craft-num">01</div>
+          <h3 class="craft-title">Web<br>Development</h3>
+          <p class="craft-desc">
+            From pixel-perfect interfaces to solid backends.
+            I build web experiences that feel effortless — on every screen, every connection.
+          </p>
+        </div>
+        <div class="craft-item reveal reveal-delay-1">
+          <div class="craft-num">02</div>
+          <h3 class="craft-title">AI<br>Integration</h3>
+          <p class="craft-desc">
+            Fascinated by large language models and the products they make possible.
+            I experiment, prototype, and find real uses for what's emerging.
+          </p>
+        </div>
+        <div class="craft-item reveal reveal-delay-2">
+          <div class="craft-num">03</div>
+          <h3 class="craft-title">Global<br>Perspective</h3>
+          <p class="craft-desc">
+            Travel teaches you to read a room.
+            Navigating new cultures and contexts has made me a sharper thinker
+            and a better collaborator.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="contact-inner">
+        <h2 class="contact-headline">
+          Let's build<br>something <em>worth making.</em>
+        </h2>
+        <div class="contact-actions">
+          <a href="mailto:francois.barrailla@gmail.com" class="btn-primary">
+            Send an email ↗
+          </a>
+          <a
+            href="https://instagram.com/tonton__francky"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-secondary"
+          >
+            @tontonfrancky ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> François Barrailla</span>
+    <span>Made with care</span>
+  </footer>
+
+  <script>
+    // ── Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Nav on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Identity rotator
+    const track  = document.getElementById('identityTrack');
+    const items  = track.querySelectorAll('.identity-item');
+    let   current = 0;
+
+    function rotateIdentity() {
+      current = (current + 1) % items.length;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+      track.style.transform  = `translateY(calc(-1.7em * ${current}))`;
+    }
+
+    setInterval(rotateIdentity, 2800);
+
+    // ── Ticker
+    const words = [
+      'Web Development', 'AI Enthusiast', 'World Traveler',
+      'React', 'Node.js', 'Open Source', 'Photography',
+      'Clean Code', 'LLMs', 'Curious Mind', 'Open to Collabs',
+    ];
+
+    const tickerTrack = document.getElementById('tickerTrack');
+    const doubled     = [...words, ...words];
+
+    tickerTrack.innerHTML = doubled
+      .map(w => `<span class="ticker-item"><span class="ticker-dot"></span>${w}</span>`)
+      .join('');
+
+    // ── Scroll reveal
+    const reveals  = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
