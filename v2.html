@@ -896,7 +896,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="topic">Topic</label>
-              <select class="form-select" id="topic" name="topic" required>
+              <select class="form-select" id="service" name="service" required>
                 <option value="" disabled selected>Select a topic</option>
                 <option value="contact">Contact</option>
                 <option value="business">Business</option>
@@ -930,6 +930,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -951,10 +952,27 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Contact form — success state
+    // Contact form — EmailJS submission
+    emailjs.init('-BGhKDSFxI8D8E1hT');
+
     document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      e.currentTarget.closest('.contact-form-wrap').classList.add('submitted');
+      const form = e.currentTarget;
+      const wrap = form.closest('.contact-form-wrap');
+      const btn = form.querySelector('[type="submit"]');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      emailjs.sendForm('service_nop1bn9', 'template_3yov3hs', form)
+        .then(() => {
+          wrap.classList.add('submitted');
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = 'Send message →';
+          alert('Something went wrong. Please try again.');
+        });
     });
   </script>
 
