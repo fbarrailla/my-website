@@ -754,6 +754,267 @@
       .craft-num { font-size: 0.8rem; }
     }
 
+    /* ─── CV ─────────────────────────────────────────── */
+    #cv {
+      background: var(--cream-2);
+      padding: 6.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cv-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--ink-2);
+      background: var(--cream);
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-cv-print:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+    }
+
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0 4rem;
+    }
+
+    .cv-block {
+      display: contents;
+    }
+
+    .cv-block-label {
+      padding-top: 2.75rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--violet);
+    }
+
+    .cv-block-content {
+      padding-top: 2.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-block:first-of-type .cv-block-content {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .cv-block:first-of-type .cv-block-label {
+      padding-top: 0;
+    }
+
+    .cv-profile-text {
+      font-size: 1.025rem;
+      color: var(--ink-2);
+      line-height: 1.85;
+      max-width: 600px;
+    }
+
+    .cv-skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .cv-tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 6px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--ink-2);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .cv-tag:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+    }
+
+    .cv-exp-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cv-exp-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.2rem 1.5rem;
+    }
+
+    .cv-exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cv-exp-item:first-child { padding-top: 0; }
+
+    .cv-exp-role {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      grid-column: 1;
+    }
+
+    .cv-exp-company {
+      font-size: 0.85rem;
+      color: var(--violet);
+      font-weight: 500;
+      margin-top: 0.1rem;
+      grid-column: 1;
+    }
+
+    .cv-exp-period {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: start;
+      text-align: right;
+      padding-top: 0.25rem;
+    }
+
+    .cv-exp-bullets {
+      grid-column: 1 / -1;
+      margin-top: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cv-exp-bullet {
+      font-size: 0.88rem;
+      color: var(--ink-2);
+      line-height: 1.65;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .cv-exp-bullet::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .cv-edu-degree {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .cv-edu-school {
+      font-size: 0.88rem;
+      color: var(--ink-2);
+      margin-top: 0.15rem;
+    }
+
+    .cv-lang-list {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .cv-lang-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .cv-lang-name {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .cv-lang-level {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      opacity: 0.55;
+    }
+
+    @media (max-width: 768px) {
+      #cv { padding: 4.5rem 1.5rem; }
+
+      .cv-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .cv-block { display: block; }
+
+      .cv-block-label {
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
+        border-top: 1px solid var(--border);
+        display: block;
+      }
+
+      .cv-block:first-of-type .cv-block-label { border-top: none; }
+
+      .cv-block-content {
+        padding-top: 0.75rem;
+        border-top: none;
+      }
+
+      .cv-exp-item {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-exp-period {
+        grid-column: 1;
+        grid-row: auto;
+        text-align: left;
+        order: -1;
+        margin-bottom: 0.2rem;
+      }
+    }
+
+    @media print {
+      nav, .btn-cv-print { display: none !important; }
+      body { background: white; }
+      #cv { background: white; border: none; padding: 2rem 0; }
+      .cv-layout { grid-template-columns: 160px 1fr; gap: 0 2.5rem; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+
     /* ─── REDUCED MOTION ──────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -773,6 +1034,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#craft">Services</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#cv">CV</a></li>
     </ul>
   </nav>
 
@@ -872,6 +1134,142 @@
             </div>
             <span class="craft-arrow" aria-hidden="true">→</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv">
+      <div class="section-container">
+        <div class="cv-header-row">
+          <div>
+            <span class="section-tag reveal">Résumé</span>
+            <h2 class="section-title reveal reveal-d1">10+ years building<br>for the web.</h2>
+          </div>
+          <button class="btn-cv-print reveal reveal-d2" onclick="window.print()">Print ↓</button>
+        </div>
+
+        <div class="cv-layout">
+
+          <!-- Profile -->
+          <div class="cv-block">
+            <div class="cv-block-label reveal">Profile</div>
+            <div class="cv-block-content reveal reveal-d1">
+              <p class="cv-profile-text">
+                Senior Front-End Engineer with 10+ years of experience building scalable web applications.
+                Expert in modern JavaScript frameworks, performance optimization, and clean architecture.
+              </p>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="cv-block">
+            <div class="cv-block-label reveal">Skills</div>
+            <div class="cv-block-content reveal reveal-d1">
+              <div class="cv-skill-tags">
+                <span class="cv-tag">React</span>
+                <span class="cv-tag">Next.js</span>
+                <span class="cv-tag">Angular</span>
+                <span class="cv-tag">TypeScript</span>
+                <span class="cv-tag">Node.js</span>
+                <span class="cv-tag">Docker</span>
+                <span class="cv-tag">CI/CD</span>
+                <span class="cv-tag">AWS</span>
+                <span class="cv-tag">Firebase</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="cv-block">
+            <div class="cv-block-label reveal">Experience</div>
+            <div class="cv-block-content reveal reveal-d1">
+              <div class="cv-exp-list">
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Senior Front-End Developer</div>
+                  <div class="cv-exp-company">ekino — Ho Chi Minh City</div>
+                  <div class="cv-exp-period">2025 – 2026</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">AI tools integration, performance optimization, and scalable application architecture</li>
+                  </ul>
+                </div>
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Senior Front-End Developer</div>
+                  <div class="cv-exp-company">Hello Health Group</div>
+                  <div class="cv-exp-period">2021 – 2022</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">Architecture design, testing strategy, and legacy system modernisation</li>
+                  </ul>
+                </div>
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Lead Front-End Engineer</div>
+                  <div class="cv-exp-company">ekino</div>
+                  <div class="cv-exp-period">2018 – 2021</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">Team leadership, CI/CD pipelines, and internal SDK development</li>
+                  </ul>
+                </div>
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Front-End Engineer</div>
+                  <div class="cv-exp-company">ekino Bordeaux</div>
+                  <div class="cv-exp-period">2016 – 2018</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">React application development and testing</li>
+                  </ul>
+                </div>
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Web Developer</div>
+                  <div class="cv-exp-company">Lectra</div>
+                  <div class="cv-exp-period">2015 – 2016</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">React stack implementation and cloud infrastructure</li>
+                  </ul>
+                </div>
+
+                <div class="cv-exp-item">
+                  <div class="cv-exp-role">Front-End Developer</div>
+                  <div class="cv-exp-company">SQLi</div>
+                  <div class="cv-exp-period">2012 – 2015</div>
+                  <ul class="cv-exp-bullets">
+                    <li class="cv-exp-bullet">Frontend integration and backend fundamentals</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="cv-block">
+            <div class="cv-block-label reveal">Education</div>
+            <div class="cv-block-content reveal reveal-d1">
+              <div class="cv-edu-degree">MMI — Métiers du Multimédia et de l'Internet</div>
+              <div class="cv-edu-school">Université de Bordeaux</div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="cv-block">
+            <div class="cv-block-label reveal">Languages</div>
+            <div class="cv-block-content reveal reveal-d1">
+              <div class="cv-lang-list">
+                <div class="cv-lang-item">
+                  <span class="cv-lang-name">French</span>
+                  <span class="cv-lang-level">Native</span>
+                </div>
+                <div class="cv-lang-item">
+                  <span class="cv-lang-name">English</span>
+                  <span class="cv-lang-level">Fluent</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
